@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>HW3 Dashboard</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="css/mdb.min.css" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="css/style.min.css" rel="stylesheet">
+
+  <style>
+
+    .map-container{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+    }
+
+    .map-container iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+    }
+  </style>
+
+  <script type="text/javascript" src="dashboard.js"></script>
+
+</head>
+
+<body class="grey lighten-3">
+
+  <!--Main Navigation-->
+  <header>
+
+    <!-- Navbar -->
+    <nav id= "nav-top" class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+      <div class="container-fluid">
+
+        <!-- Brand -->
+        <a class="navbar-brand waves-effect" href="http://127.0.0.1:8080/main/main.html">
+          <strong class="blue-text">HW3</strong>
+        </a>
+
+        <!-- Collapse -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+          <!-- Left -->
+          <ul class="navbar-nav mr-auto">
+            <li id = "dashboard-top-nav" class="nav-item active" onclick="onClickDashboard();">
+              <a class="nav-link waves-effect">Dashboard</a>
+            </li>
+            <li id = "addpost-top-nav" class="nav-item" onclick="onClickAddPost();">
+              <a class="nav-link waves-effect" target="_blank">Add post</a>
+            </li>
+            <li id = "profile-top-nav" class="nav-item" onclick="onClickProfile()">
+              <a class="nav-link waves-effect" target="_blank">Profile</a>
+            </li>
+            <li id = "signout-top-nav" class="nav-item" onclick="onClickSignOut()">
+              <a class="nav-link waves-effect" target="_blank">Sign out</a>
+            </li>
+
+          </ul>
+
+          <!-- Right -->
+          <ul class="navbar-nav nav-flex-icons">
+            <li class="nav-item">
+              <a href="https://github.com" class="nav-link border border-light rounded waves-effect"
+                target="_blank">
+                <i class="fab fa-github mr-2"></i>HW3 GitHub
+              </a>
+            </li>
+          </ul>
+
+        </div>
+
+      </div>
+    </nav>
+    <!-- Navbar -->
+
+    <!-- Sidebar -->
+    <div class="sidebar-fixed position-fixed">
+
+      <a class="logo-wrapper waves-effect" href="http://127.0.0.1:8080/main/main.html">
+        <img src="logo.png" style="width: 231px; height: 80px;" class="img-fluid" alt="">
+      </a>
+
+      <div class="list-group list-group-flush">
+        <a id = "dashboard-left-nav" class="list-group-item waves-effect active" onclick="onClickDashboard();">
+          <i class="fas fa-chart-pie mr-3"></i>Dashboard</a>
+
+        <a id = "addpost-left-nav" class="list-group-item list-group-item-action waves-effect" onclick="onClickAddPost();">
+          <i class="fas fa-plus-square mr-3"></i>Add post</a>
+
+        <a id = "profile-left-nav" class="list-group-item list-group-item-action waves-effect" onclick="onClickProfile();">
+          <i class="fas fa-user mr-3"></i>Profile</a>
+
+        <a id = "signout-left-nav" class="list-group-item list-group-item-action waves-effect" onclick="onClickSignOut();">
+          <i class="fas fa-sign-out-alt mr-3"></i>Sign out</a>
+      </div>
+
+    </div>
+    <!-- Sidebar -->
+
+  </header>
+  <!--Main Navigation-->
+
+  <!--Main layout-->
+  <main class="pt-5 mx-lg-5">
+    <div class="container-fluid mt-5">
+
+      <!--Grid row-->
+      <div id="my-posts" class="row wow fadeIn">
+        
+      </div>
+
+      <div id="add-post" class="row wow fadeIn" style="display: none;">
+        <div class="container">
+          <br/>
+          <div class="card">
+            <br/>
+            <div class="text-center">
+              <img class="card-img-top rounded" style="width: 150px; height: 150px;" src="new-post.png" alt="Main Program Registration">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title text-center">Add new post</h5>
+              <form>
+                <div class="form-group">
+                  <label for="add-post-title">Title</label>
+                  <input type="text" class="form-control" id="add-post-title" name="add-post-title" placeholder="Type title of your post." minlength="1" maxlength = "30" required>
+                </div>
+                <div class="form-group">
+                  <label for="add-post-body">Content</label>
+                  <textarea class="form-control" id="add-post-body" name="form-control" rows="5" maxlength = "1000" data-announce="true"></textarea>
+                </div>
+                <br/>
+                <button type="submit" class="btn btn-primary btn-block" onclick="checkCookie(addPost);">Submit</button>
+                <br/>
+                <div class="form-group" id='add-post-resultBox' style="display: none;">
+                  <label for="add-post-result">Result</label>
+                  <textarea id="add-post-result" class="form-control" readonly>ID : 98128712</textarea>
+                </div>
+              </form>
+            </div>
+          </div>
+          <br/>
+          <br/>
+        </div>
+
+      </div>
+
+      <div id="my-profile" class="row wow fadeIn" style="display: none;">  
+
+      </div>
+      <!--Grid row-->
+
+    </div>
+  </main>
+  <!--Main layout-->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <!-- Initializations -->
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+  </script>
+
+  </script>
+</body>
+
+</html>
